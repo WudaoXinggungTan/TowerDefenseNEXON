@@ -97,7 +97,6 @@ namespace Features.Player.Scripts
 
         public void OnMove(InputAction.CallbackContext context)
         {
-            Debug.Log("OnMove...");
             Move.Invoke(context.ReadValue<Vector2>());
         }
 
