@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5011841778711657465}
   - component: {fileID: 6184436595454128765}
   - component: {fileID: 6257936800177537908}
-  - component: {fileID: 1367053694508818173}
+  - component: {fileID: 1607079308195116045}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
@@ -98,6 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2013da68fe78ea846b03bd2f39153125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Enemy.Scripts.EnemyProduct
+  enemyHealth: 5
+  currencyDropAmount: 10
 --- !u!114 &6184436595454128765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,10 +128,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Features.Core.Scripts.GameObjectDetector
   detectionLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 192
   detectionRadius: 1
   detectionInterval: 0.5
---- !u!114 &1367053694508818173
+--- !u!114 &1607079308195116045
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,9 +140,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5923165839615504180}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d4f1bfc6e8fd5a46b7ace38a95cbe44, type: 3}
+  m_Script: {fileID: 11500000, guid: 800413d70fd4b374b959ec4e16eafc09, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Features.Core.Scripts.AttackDetectedObject
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
+  projectileFactory: {fileID: 0}
+  projectileFirePosition: {fileID: 0}
+  attackRate: 1
+  enemyDamage: 1
 --- !u!1001 &391133290594523646
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Features.Core.Scripts;
 
 namespace Features.Enemy.Scripts
 {
@@ -32,6 +33,11 @@ namespace Features.Enemy.Scripts
 
         private void FixedUpdate()
         {
+            if (!GameManager.Instance.IsGamePlaying())
+            {
+                return;
+            }
+
             Vector3 targetPos = destination.transform.position;
             targetPos.y = transform.position.y; // Enemy always stays at the starting height, else it would fly up to reach the pivot point of the destination
 

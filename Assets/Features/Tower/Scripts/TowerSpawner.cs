@@ -1,5 +1,6 @@
 using UnityEngine;
 using Features.Core.Scripts;
+using Features.Player.Scripts;
 
 namespace Features.Tower.Scripts
 {
@@ -9,6 +10,7 @@ namespace Features.Tower.Scripts
 
         [SerializeField] private GameObject towerSpawnPosition;
         [SerializeField] private TowerFactory towerFactory;
+        [SerializeField] private int requireCurrency;
 
         private CollisionDetector detector;
         private bool isSpawned = false;
@@ -32,6 +34,15 @@ namespace Features.Tower.Scripts
             {
                 return;
             }
+
+            int playerCurrency = other.GetComponent<PlayerCurrency>().PlayerCurrentCurrency;
+
+            if (playerCurrency < requireCurrency)
+            {
+                return;
+            }
+
+            other.GetComponent<PlayerCurrency>().ChangeCurrency(requireCurrency);
 
             isSpawned = true;
             towerFactory.GetProduct(towerSpawnPosition.transform.position);

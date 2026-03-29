@@ -4,6 +4,7 @@ using Features.Core.Scripts.Interface;
 
 namespace Features.Core.Scripts
 {
+    [RequireComponent(typeof(GameObjectDetector))]
     public abstract class Attack : MonoBehaviour
     {
         #region Variables
@@ -48,6 +49,11 @@ namespace Features.Core.Scripts
 
         private void Update()
         {
+            if (!GameManager.Instance.IsGamePlaying())
+            {
+                return;
+            }
+
             if (CurrentTarget && Time.time >= nextFireTime)
             {
                 Attacking();

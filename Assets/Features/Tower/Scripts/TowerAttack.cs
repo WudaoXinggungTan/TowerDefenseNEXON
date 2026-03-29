@@ -1,4 +1,3 @@
-using UnityEngine;
 using Features.Core.Scripts;
 using Features.Core.Scripts.Interface;
 using Features.Projectile.Scripts;

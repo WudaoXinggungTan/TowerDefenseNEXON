@@ -84,9 +84,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Features.Core.Scripts.GameObjectDetector
   detectionLayer:
     serializedVersion: 2
-    m_Bits: 64
-  detectionRadius: 10
-  detectionInterval: 0.25
+    m_Bits: 512
+  detectionRadius: 15
+  detectionInterval: 1
 --- !u!114 &1809383420637181277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerAttack
   projectileFactory: {fileID: 6370595267461341711, guid: 09f468d904c5bee468846245c779bc57, type: 3}
   projectileFirePosition: {fileID: 8210004042535832628}
-  projectileFireRate: 1
+  attackRate: 0.5
 --- !u!1 &8789925821260435849
 GameObject:
   m_ObjectHideFlags: 0

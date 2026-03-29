@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7925746414465051139}
   - component: {fileID: 6370595267461341711}
   m_Layer: 0
-  m_Name: ProjectileFactory
+  m_Name: PlayerProjectileFactory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e259835cb7ca9f40bc9d1abf1101f0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Projectile.Scripts.ProjectileFactory
-  projectileProduct: {fileID: 7837815223873052909, guid: 3798088350d6c504c81adfc3aaef61a6, type: 3}
+  projectileProduct: {fileID: 7837815223873052909, guid: 89613e5a833040e40bb8e33e141c06a9, type: 3}

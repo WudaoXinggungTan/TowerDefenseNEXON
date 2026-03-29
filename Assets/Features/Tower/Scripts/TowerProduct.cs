@@ -12,13 +12,13 @@ namespace Features.Tower.Scripts
         public bool IsInitialized { get; }
 
         public Vector3 TowerPositon { get; private set; }
+
         #endregion
 
         #region Public Methods
 
         public void Initialize()
         {
-            //
             TowerPositon = transform.position;
         }
 

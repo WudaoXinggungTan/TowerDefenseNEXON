@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+using Features.Core.Scripts;
 
 namespace Features.Player.Scripts
 {
@@ -35,25 +35,35 @@ namespace Features.Player.Scripts
 
         private void FixedUpdate()
         {
-            Vector3 forward = mainCamera.forward;
-            Vector3 right = mainCamera.right;
-            
-            forward.y = 0;
-            right.y = 0;
-            forward.Normalize();
-            right.Normalize();
-            
-            Vector3 forwardRelative = moveInputDirection.y * forward;
-            Vector3 rightRelative = moveInputDirection.x * right;
+            if (!GameManager.Instance.IsGamePlaying())
+            {
+                return;
+            }
 
-            Vector3 moveDirection = forwardRelative + rightRelative;
-
+            Vector3 moveDirection = CalculateMovementDirectionBaseOnCamera();
             Vector3 movementVector = new Vector3(moveDirection.x, 0f, moveDirection.z).normalized;
             if (movementVector.sqrMagnitude > 0.001f)
             {
                 HandlePlayerMovement(movementVector);
                 HandlePlayerRotation(movementVector);
             }
+        }
+
+        private Vector3 CalculateMovementDirectionBaseOnCamera()
+        {
+            Vector3 forward = mainCamera.forward;
+            Vector3 right = mainCamera.right;
+
+            forward.y = 0;
+            right.y = 0;
+            forward.Normalize();
+            right.Normalize();
+
+            Vector3 forwardRelative = moveInputDirection.y * forward;
+            Vector3 rightRelative = moveInputDirection.x * right;
+
+            Vector3 moveDirection = forwardRelative + rightRelative;
+            return moveDirection;
         }
 
 

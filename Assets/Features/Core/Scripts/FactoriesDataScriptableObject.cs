@@ -5,8 +5,7 @@ using Features.Core.Scripts;
 
 namespace Features.Core.Scripts
 {
-    [CreateAssetMenu(fileName = "FactoriesSpawnProbabilityScriptableObject",
-        menuName = "Scriptable Objects/FactoriesSpawnProbabilityScriptableObject")]
+    [CreateAssetMenu(fileName = "FactoriesSpawnProbabilityScriptableObject", menuName = "Scriptable Objects/FactoriesSpawnProbabilityScriptableObject")]
     public class FactoriesDataScriptableObject : ScriptableObject
     {
         [Serializable]
@@ -15,10 +14,12 @@ namespace Features.Core.Scripts
             #region Variables
 
             public Factory factoryType;
-            [Range(0, 100)] public int  probability = 0;
-            public float   cooldown = 1f;
+            [Range(0, 100)] public int probability = 0;
+            public float cooldown = 1f;
 
             public GameObject spawnPosition;
+            public int spawnCount = 100;
+
             #endregion
 
             #region Private Variables
@@ -35,5 +36,16 @@ namespace Features.Core.Scripts
         }
 
         public List<FactorySpawnData> factoriesList;
+
+        public int GetTotalSpawnCount()
+        {
+            int totalSpawnCount = 0;
+            foreach (var factorySpawnData in factoriesList)
+            {
+                totalSpawnCount += factorySpawnData.spawnCount;
+            }
+
+            return totalSpawnCount;
+        }
     }
 }

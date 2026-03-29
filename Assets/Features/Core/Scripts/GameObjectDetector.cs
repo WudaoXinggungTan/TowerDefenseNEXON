@@ -34,6 +34,11 @@ namespace Features.Core.Scripts
         // Using OverlapSphere to detect all the game object currently inside the radius each 15 frames.
         private void DetectObjects()
         {
+            if (!GameManager.Instance.IsGamePlaying())
+            {
+                return;
+            }
+
             gameObjects.Clear();
 
             Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, detectionLayer);
@@ -45,10 +50,9 @@ namespace Features.Core.Scripts
                     gameObjects.Add(col.gameObject);
                 }
             }
-            
+
             OnGameObjectsDetected?.Invoke(gameObjects);
         }
-
 
         private void OnDisable()
         {

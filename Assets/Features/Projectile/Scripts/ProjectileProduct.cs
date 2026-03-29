@@ -10,14 +10,23 @@ namespace Features.Projectile.Scripts
         #region Variables
 
         [SerializeField] private float speed = 2f;
-        [SerializeField] private float arcHeight = 5f;
+        [SerializeField] private float projectileDamage = 5f;
+        [SerializeField] private LayerMask targetLayerMask;
 
         public string ProductName { get; }
         public bool IsInitialized { get; private set; }
         public GameObject Target { get; set; }
 
         private Rigidbody projectileRigidbody;
-        private float traveledTime;
+
+        #endregion
+
+        #region Private Methods
+
+        private void Awake()
+        {
+            projectileRigidbody = GetComponent<Rigidbody>();
+        }
 
         #endregion
 
@@ -26,24 +35,54 @@ namespace Features.Projectile.Scripts
         public void Initialize()
         {
             IsInitialized = true;
-            projectileRigidbody = GetComponent<Rigidbody>();
         }
 
         public void FixedUpdate()
         {
-            if (Target != null)
+            if (Target == null)
             {
-                traveledTime += Time.fixedDeltaTime * speed;
-                float t = Mathf.Clamp01(traveledTime);
-                Vector3 nextPosition = MathParabola.Parabola(transform.position, Target.transform.position, arcHeight, t);
-                projectileRigidbody.MovePosition(nextPosition);
+                return;
+            }
+
+            if (Target.gameObject.activeInHierarchy)
+            {
+                Vector3 targetPosition = Target.transform.position;
+                Vector3 direction = (targetPosition - transform.position).normalized;
+
+                projectileRigidbody.MovePosition(projectileRigidbody.position + direction * (speed * Time.fixedDeltaTime));
+                if (targetPosition != projectileRigidbody.position)
+                {
+                    transform.LookAt(targetPosition);
+                }
+            }
+            else
+            {
+                // If the target already died, return this (still flying) projectile to the pool
+                ReturnToObjectPool();
             }
         }
 
-        private void HandleImpact()
+        private void OnTriggerEnter(Collider other)
         {
-            // Logic for hitting the enemy, then returning to pool
-            // ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
+            if (((1 << other.gameObject.layer) & targetLayerMask) != 0)
+            {
+                HandleImpact(other.gameObject);
+            }
+        }
+
+        private void HandleImpact(GameObject other)
+        {
+            if (other.TryGetComponent<IDamageable>(out var damageable))
+            {
+                damageable.Damage(projectileDamage);
+            }
+
+            ReturnToObjectPool();
+        }
+
+        private void ReturnToObjectPool()
+        {
+            ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
         }
 
         #endregion
