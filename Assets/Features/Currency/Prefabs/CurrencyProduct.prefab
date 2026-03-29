@@ -96,10 +96,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Currency.Scripts.CurrencyProduct
   currencyAmount: 5
-  currencySpreadRadius: 0.5
+  currencySpreadRadius: 1
   spreadForce: 3
-  jumpHeight: 1
-  flySpeed: 5
+  jumpHeight: 2
+  flySpeed: 8
   playerLayer:
     serializedVersion: 2
     m_Bits: 64

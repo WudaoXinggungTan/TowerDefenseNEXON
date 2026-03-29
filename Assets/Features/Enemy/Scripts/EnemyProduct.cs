@@ -13,9 +13,11 @@ namespace Features.Enemy.Scripts
         public string ProductName { get; }
         public bool IsInitialized { get; private set; }
 
+        [SerializeField] private int currencyDropAmount = 10;
         [SerializeField] private float enemyMaxHealth = 3;
         private float enemyHealth;
-        [SerializeField] private int currencyDropAmount = 10;
+        private bool isReleased = false;
+
         public static event Action<int, Vector3> OnEnemyDies;
         public event EventHandler<IHasProgress.ProgressChangedEventArgs> OnProgressChanged;
 
@@ -26,6 +28,7 @@ namespace Features.Enemy.Scripts
         public void Initialize()
         {
             IsInitialized = true;
+            isReleased = false;
             enemyHealth = enemyMaxHealth;
         }
 
@@ -37,6 +40,12 @@ namespace Features.Enemy.Scripts
             if (enemyHealth <= 0f)
             {
                 OnEnemyDies?.Invoke(currencyDropAmount, transform.position);
+                if (isReleased)
+                {
+                    return;
+                }
+
+                isReleased = true;
                 ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
             }
         }

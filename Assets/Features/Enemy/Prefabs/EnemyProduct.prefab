@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2013da68fe78ea846b03bd2f39153125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Enemy.Scripts.EnemyProduct
-  enemyMaxHealth: 3
   currencyDropAmount: 4
+  enemyMaxHealth: 3
 --- !u!114 &6184436595454128765
 MonoBehaviour:
   m_ObjectHideFlags: 0

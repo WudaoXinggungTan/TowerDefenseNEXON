@@ -42,14 +42,11 @@ GameObject:
   - component: {fileID: 3685147520904972087}
   - component: {fileID: 4379871681547713076}
   - component: {fileID: 3275760636501554711}
-  - component: {fileID: 911590400680473881}
-  - component: {fileID: 4537022653820286615}
   - component: {fileID: 5208008560762736650}
   - component: {fileID: 5353601324080928910}
   - component: {fileID: -8640145345770328501}
-  - component: {fileID: 1706708129502703318}
   m_Layer: 6
-  m_Name: Player
+  m_Name: Allies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,33 +120,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &911590400680473881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8156492580523045569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1d4da28e6ff4a447a87cee5089fe309, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Features.Player.Scripts.PlayerInput
---- !u!114 &4537022653820286615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8156492580523045569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70ec240902c6e0740b4c3b98cf9a6460, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Features.Player.Scripts.PlayerMovement
-  mainCamera: {fileID: 0}
-  moveSpeed: 4
-  rotationSpeed: 6
 --- !u!114 &5208008560762736650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   projectileFactory: {fileID: 6370595267461341711, guid: 01a14ae0191b1c349a2ba1af9d185db1, type: 3}
   projectileFirePosition: {fileID: 5747103797742810938}
-  attackRate: 1
+  attackRate: 0.5
 --- !u!114 &5353601324080928910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,19 +165,6 @@ MonoBehaviour:
     m_Bits: 512
   detectionRadius: 5
   detectionInterval: 0.25
---- !u!114 &1706708129502703318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8156492580523045569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a63e927a3aa61d049bccb677e103dae2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Features.Player.Scripts.PlayerCurrency
-  playerInitialCurrency: 50
 --- !u!1001 &2374235375430042771
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -234,7 +191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6644553568e30f4429008e602ada81bd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6644553568e30f4429008e602ada81bd, type: 3}
       propertyPath: m_LocalPosition.z

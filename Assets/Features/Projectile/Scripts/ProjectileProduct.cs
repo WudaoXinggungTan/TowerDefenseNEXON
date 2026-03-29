@@ -18,6 +18,7 @@ namespace Features.Projectile.Scripts
         public GameObject Target { get; set; }
 
         private Rigidbody projectileRigidbody;
+        private bool isReleased = false;
 
         #endregion
 
@@ -35,6 +36,7 @@ namespace Features.Projectile.Scripts
         public void Initialize()
         {
             IsInitialized = true;
+            isReleased = false;
         }
 
         public void FixedUpdate()
@@ -82,6 +84,12 @@ namespace Features.Projectile.Scripts
 
         private void ReturnToObjectPool()
         {
+            if (isReleased)
+            {
+                return;
+            }
+
+            isReleased = true;
             ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
         }
 

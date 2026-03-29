@@ -17,14 +17,14 @@ MonoBehaviour:
     probability: 33
     cooldown: 0.5
     spawnPosition: {fileID: 8881814129344006064, guid: e0e3a5aa13adb7341aec724f963ffe64, type: 3}
-    spawnCount: 18
+    spawnCount: 99
   - factoryType: {fileID: 4587346432720152666, guid: 6e7f4c15b434ad343abecb11d2832d6d, type: 3}
     probability: 33
     cooldown: 0.5
     spawnPosition: {fileID: 7423576808946070174, guid: 9d42327d530988d489e2fbc7361e983e, type: 3}
-    spawnCount: 27
+    spawnCount: 99
   - factoryType: {fileID: 4587346432720152666, guid: 6e7f4c15b434ad343abecb11d2832d6d, type: 3}
     probability: 33
     cooldown: 0.5
     spawnPosition: {fileID: 6262610710179808178, guid: 6c2a7aba56f789a42abebd674b50474f, type: 3}
-    spawnCount: 24
+    spawnCount: 99
