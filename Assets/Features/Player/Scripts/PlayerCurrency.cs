@@ -7,7 +7,7 @@ namespace Features.Player.Scripts
     {
         #region Variables
 
-        [SerializeField] private int playerCurrentCurrency;
+        [SerializeField] private int playerInitialCurrency;
 
         public int PlayerCurrentCurrency { get; private set; }
         public event EventHandler<int> OnCurrentCurrencyChanged;
@@ -18,7 +18,7 @@ namespace Features.Player.Scripts
 
         private void Start()
         {
-            PlayerCurrentCurrency = playerCurrentCurrency;
+            PlayerCurrentCurrency = playerInitialCurrency;
         }
 
         #endregion
