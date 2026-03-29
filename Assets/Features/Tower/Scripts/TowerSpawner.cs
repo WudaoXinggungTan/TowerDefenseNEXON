@@ -24,25 +24,26 @@ namespace Features.Tower.Scripts
             detector = towerSpawnPosition.GetComponent<CollisionDetector>();
             if (detector != null)
             {
-                detector.OnCollisionDetected += HandlePointCollision;
+                detector.OnCollisionDetected += HandlePlayerCollision;
             }
         }
 
-        private void HandlePointCollision(GameObject point, Collider other)
+        private void HandlePlayerCollision(GameObject point, Collider other)
         {
             if (isSpawned)
             {
                 return;
             }
 
-            int playerCurrency = other.GetComponent<PlayerCurrency>().PlayerCurrentCurrency;
+            PlayerCurrency playerCurrency = other.GetComponent<PlayerCurrency>();
 
-            if (playerCurrency < requireCurrency)
+            int playerCurrentCurrency = playerCurrency.PlayerCurrentCurrency;
+            if (playerCurrentCurrency < requireCurrency)
             {
                 return;
             }
 
-            other.GetComponent<PlayerCurrency>().ChangeCurrency(requireCurrency);
+            playerCurrency.ChangeCurrency(requireCurrency);
 
             isSpawned = true;
             towerFactory.GetProduct(towerSpawnPosition.transform.position);

@@ -25,9 +25,17 @@ namespace Features.Player.Scripts
 
         #region Public Methods
 
-        public void ChangeCurrency(int amount)
+        public void ChangeCurrency(int amount, bool lower = true)
         {
-            PlayerCurrentCurrency -= amount;
+            if (lower)
+            {
+                PlayerCurrentCurrency -= amount;
+            }
+            else
+            {
+                PlayerCurrentCurrency += amount;
+            }
+
             OnCurrentCurrencyChanged?.Invoke(this, PlayerCurrentCurrency);
         }
 

@@ -309,7 +309,7 @@ namespace Features.Core.Scripts
             return SpawnObject<GameObject>(originalPrefab, parent, rotation, poolType);
         }
 
-        public void ReturnObjectToPool(GameObject gameObj, PoolType poolType = PoolType.GameObjects)
+        public void ReturnObjectToPool(GameObject gameObj, PoolType poolType = PoolType.GameObjects)    
         {
             if (cloneToPrefabMap.TryGetValue(gameObj, out GameObject prefab))
             {

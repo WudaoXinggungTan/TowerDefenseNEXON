@@ -1,0 +1,43 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect x="0" y="0" width="512" height="512" rx="40" fill="#8B6F47"></rect>
+
+  <!-- Inner panel -->
+  <rect x="24" y="24" width="464" height="464" rx="32" fill="#C9A77A"></rect>
+
+  <!-- White border -->
+  <rect x="24" y="24" width="464" height="464" rx="32" fill="none" stroke="#FFFFFF" stroke-width="12"></rect>
+
+  <!-- Ballista Icon -->
+  <g transform="translate(256, 220) scale(1.2)">
+    <!-- Base -->
+    <rect x="-80" y="40" width="160" height="20" fill="#2E2E2E" rx="6"></rect>
+    
+    <!-- Vertical support -->
+    <rect x="-10" y="-20" width="20" height="60" fill="#2E2E2E"></rect>
+    
+    <!-- Arms -->
+    <line x1="-60" y1="-40" x2="0" y2="-10" stroke="#2E2E2E" stroke-width="12" stroke-linecap="round"></line>
+    <line x1="60" y1="-40" x2="0" y2="-10" stroke="#2E2E2E" stroke-width="12" stroke-linecap="round"></line>
+    
+    <!-- String -->
+    <line x1="-60" y1="-40" x2="60" y2="-40" stroke="#2E2E2E" stroke-width="4"></line>
+    
+    <!-- Bolt -->
+    <line x1="0" y1="-10" x2="0" y2="-80" stroke="#2E2E2E" stroke-width="8"></line>
+    <polygon points="0,-100 -10,-80 10,-80" fill="#2E2E2E"></polygon>
+  </g>
+
+  <!-- Upgrade Arrow -->
+  <polygon points="256,300 226,340 286,340" fill="#2ECC71"></polygon>
+  <rect x="246" y="340" width="20" height="40" fill="#2ECC71"></rect>
+
+  <!-- Coin -->
+  <circle cx="180" cy="420" r="28" fill="#F1C40F"></circle>
+  <circle cx="180" cy="420" r="20" fill="#FFD54A"></circle>
+
+  <!-- Cost Text -->
+  <text x="240" y="435" font-family="Arial" font-size="48" fill="#000000" font-weight="bold">
+    50
+  </text>
+</svg>

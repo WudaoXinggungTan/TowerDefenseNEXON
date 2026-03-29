@@ -23,6 +23,17 @@ namespace Features.Core.Scripts
 
         private void OnTriggerEnter(Collider other)
         {
+            CheckCollision(other);
+        }
+
+        // Add this to detect objects already standing inside
+        private void OnTriggerStay(Collider other)
+        {
+            CheckCollision(other);
+        }
+
+        private void CheckCollision(Collider other)
+        {
             if (((1 << other.gameObject.layer) & layerMask) != 0)
             {
                 OnCollisionDetected?.Invoke(this.gameObject, other);

@@ -37,7 +37,15 @@ namespace Features.Core.Scripts
                 return;
             }
 
-            if (CurrentTarget == null || !CurrentTarget.activeInHierarchy)
+            if (CurrentTarget != null)
+            {
+                if (!CurrentTarget.activeInHierarchy || !detectedObjects.Contains(CurrentTarget))
+                {
+                    CurrentTarget = null; // Target walked out of range or died
+                }
+            }
+
+            if (CurrentTarget == null)
             {
                 foreach (GameObject obj in detectedObjects)
                 {

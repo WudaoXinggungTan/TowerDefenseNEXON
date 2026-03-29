@@ -56,8 +56,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 12, z: 10}
-  m_Center: {x: 0, y: 6, z: 0}
+  m_Size: {x: 5, y: 6, z: 5}
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!114 &6786048813785074228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,8 +85,8 @@ MonoBehaviour:
   detectionLayer:
     serializedVersion: 2
     m_Bits: 512
-  detectionRadius: 15
-  detectionInterval: 1
+  detectionRadius: 10
+  detectionInterval: 0.25
 --- !u!114 &1809383420637181277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerAttack
   projectileFactory: {fileID: 6370595267461341711, guid: 09f468d904c5bee468846245c779bc57, type: 3}
   projectileFirePosition: {fileID: 8210004042535832628}
-  attackRate: 0.5
+  attackRate: 0.25
 --- !u!1 &8789925821260435849
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +127,7 @@ Transform:
   m_GameObject: {fileID: 8789925821260435849}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8, y: 11, z: 0}
+  m_LocalPosition: {x: 2.277, y: 5.363, z: 0.027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -181,6 +181,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ce9841fad4324a84b905e2b647d78eb8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bce3df938381f3942a256e9d2f248006, type: 2}
     - target: {fileID: 919132149155446097, guid: ce9841fad4324a84b905e2b647d78eb8, type: 3}
       propertyPath: m_Name
       value: siege-ballista
@@ -205,15 +209,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 5c0c1ae00a701de4194d4a9352ad9476, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5c0c1ae00a701de4194d4a9352ad9476, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5c0c1ae00a701de4194d4a9352ad9476, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5c0c1ae00a701de4194d4a9352ad9476, type: 3}
       propertyPath: m_LocalPosition.x
@@ -259,6 +263,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5c0c1ae00a701de4194d4a9352ad9476, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bce3df938381f3942a256e9d2f248006, type: 2}
     - target: {fileID: 919132149155446097, guid: 5c0c1ae00a701de4194d4a9352ad9476, type: 3}
       propertyPath: m_Name
       value: Visual

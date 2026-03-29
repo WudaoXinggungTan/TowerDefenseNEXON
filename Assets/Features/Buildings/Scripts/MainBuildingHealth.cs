@@ -3,15 +3,14 @@ using UnityEngine;
 using Features.Core.Scripts;
 using Features.Core.Scripts.Interface;
 
-namespace Features.Player.Scripts
+namespace Features.Buildings.Scripts
 {
-    public class PlayerHealth : MonoBehaviour, IDamageable, IHasProgress
+    public class MainBuildingHealth : MonoBehaviour, IDamageable, IHasProgress
     {
         #region Variables
 
-        [SerializeField] private float playerMaxHealth = 5;
-        private float playerHealth;
-
+        [SerializeField] private float mainBuildingMaxHealth = 10;
+        private float mainBuildingHealth;
         public event EventHandler<IHasProgress.ProgressChangedEventArgs> OnProgressChanged;
 
         #endregion
@@ -20,7 +19,7 @@ namespace Features.Player.Scripts
 
         private void Start()
         {
-            playerHealth = playerMaxHealth;
+            mainBuildingHealth = mainBuildingMaxHealth;
         }
 
         #endregion
@@ -29,10 +28,10 @@ namespace Features.Player.Scripts
 
         public void Damage(float amount)
         {
-            playerHealth -= amount;
-            OnProgressChanged?.Invoke(this, new IHasProgress.ProgressChangedEventArgs { ProgressAmount = (playerHealth / playerMaxHealth) });
+            mainBuildingHealth -= amount;
+            OnProgressChanged?.Invoke(this, new IHasProgress.ProgressChangedEventArgs { ProgressAmount = (mainBuildingHealth / mainBuildingMaxHealth) });
 
-            if (playerHealth <= 0f)
+            if (mainBuildingHealth <= 0f)
             {
                 GameManager.Instance.EndTheGame();
             }

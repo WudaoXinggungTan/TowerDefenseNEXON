@@ -75,7 +75,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1015
+    m_Bits: 951
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -95,9 +95,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac6083fbdeba2f4a9a21c69af7a2c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Currency.Scripts.CurrencyProduct
+  currencyAmount: 5
   currencySpreadRadius: 0.5
   spreadForce: 3
   jumpHeight: 1
+  flySpeed: 5
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &8927988991983020270
 GameObject:
   m_ObjectHideFlags: 0
