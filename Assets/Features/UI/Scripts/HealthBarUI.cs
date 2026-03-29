@@ -10,6 +10,7 @@ namespace Features.UI.Scripts
 
         [SerializeField] private GameObject hasProgressGameObject;
         [SerializeField] private Slider progressBarImage;
+        [SerializeField] private bool showHealthFromStart = true;
 
         private IHasProgress hasProgress;
 
@@ -39,7 +40,14 @@ namespace Features.UI.Scripts
                 }
             };
 
-            Hide();
+            if (showHealthFromStart)
+            {
+                Show();
+            }
+            else
+            {
+                Hide();
+            }
         }
 
         private void Show()
