@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Features.Player.Scripts
@@ -27,16 +28,28 @@ namespace Features.Player.Scripts
 
         public void ChangeCurrency(int amount, bool lower = true)
         {
-            if (lower)
-            {
-                PlayerCurrentCurrency -= amount;
-            }
-            else
-            {
-                PlayerCurrentCurrency += amount;
-            }
+            StartCoroutine(ChangeCurrencyRoutine(amount, lower));
+        }
 
-            OnCurrentCurrencyChanged?.Invoke(this, PlayerCurrentCurrency);
+        private IEnumerator ChangeCurrencyRoutine(int amount, bool lower)
+        {
+            int count = 0;
+
+            while (count < amount)
+            {
+                count++;
+
+                if (lower)
+                {
+                    PlayerCurrentCurrency -= 1;
+                }
+                else
+                {
+                    PlayerCurrentCurrency += 1;
+                }
+                OnCurrentCurrencyChanged?.Invoke(this, PlayerCurrentCurrency);
+                yield return new WaitForSeconds(0.01f);
+            }
         }
 
         #endregion

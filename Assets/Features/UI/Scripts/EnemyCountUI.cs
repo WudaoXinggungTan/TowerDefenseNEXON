@@ -32,6 +32,11 @@ namespace Features.UI.Scripts
             {
                 totalEnemiesCount--;
                 UpdateEnemyCountText();
+
+                if (totalEnemiesCount <= 0)
+                {
+                    GameManager.Instance.EndTheGame();
+                }
             };
         }
 

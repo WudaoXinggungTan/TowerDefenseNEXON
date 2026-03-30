@@ -71,20 +71,40 @@ namespace Features.Core.Scripts
 
         #region Public Methods
 
-        public bool IsWaitingToStart() { return state == State.WaitingToStart; }
+        public bool IsWaitingToStart()
+        {
+            return state == State.WaitingToStart;
+        }
 
-        public bool IsGamePlaying() { return state == State.Playing; }
+        public bool IsGamePlaying()
+        {
+            return state == State.Playing;
+        }
 
-        public bool IsGameOver() { return state == State.GameOver; }
+        public bool IsGameOver()
+        {
+            return state == State.GameOver;
+        }
 
         public float GameSpeedMultiplier() => gameSpeedMultiplier;
 
         public float Playtime() => currentPlaytime;
 
         // TODO: Find another way to pause/resume the game because this mean every other class can pause/resume the game at anytime.
-        public void PauseTheGame() { UpdateGameState(State.WaitingToStart); }
-        public void ResumeTheGame() { UpdateGameState(State.Playing); }
-        public void EndTheGame() { UpdateGameState(State.GameOver); }
+        public void PauseTheGame()
+        {
+            UpdateGameState(State.WaitingToStart);
+        }
+
+        public void ResumeTheGame()
+        {
+            UpdateGameState(State.Playing);
+        }
+
+        public void EndTheGame()
+        {
+            UpdateGameState(State.GameOver);
+        }
 
         #endregion
     }

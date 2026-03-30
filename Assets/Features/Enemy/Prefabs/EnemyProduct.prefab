@@ -130,8 +130,8 @@ MonoBehaviour:
   detectionLayer:
     serializedVersion: 2
     m_Bits: 192
-  detectionRadius: 1.2
-  detectionInterval: 1
+  detectionRadius: 1.4
+  detectionInterval: 0.25
 --- !u!114 &1607079308195116045
 MonoBehaviour:
   m_ObjectHideFlags: 0
