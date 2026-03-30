@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2013da68fe78ea846b03bd2f39153125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Enemy.Scripts.EnemyProduct
-  currencyDropAmount: 4
+  currencyDropAmount: 5
   enemyMaxHealth: 3
 --- !u!114 &6184436595454128765
 MonoBehaviour:
@@ -130,8 +130,8 @@ MonoBehaviour:
   detectionLayer:
     serializedVersion: 2
     m_Bits: 192
-  detectionRadius: 1
-  detectionInterval: 0.25
+  detectionRadius: 1.2
+  detectionInterval: 1
 --- !u!114 &1607079308195116045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,7 +147,7 @@ MonoBehaviour:
   projectileFactory: {fileID: 0}
   projectileFirePosition: {fileID: 0}
   attackRate: 1
-  enemyDamage: 1
+  enemyDamage: 3
 --- !u!1001 &391133290594523646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -229,6 +229,10 @@ PrefabInstance:
     - target: {fileID: 4254975617139137968, guid: 2befa8bb6a96fa949a505ba4139a0352, type: 3}
       propertyPath: m_Name
       value: HealthBarUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4254975617139137968, guid: 2befa8bb6a96fa949a505ba4139a0352, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6058732373311521550, guid: 2befa8bb6a96fa949a505ba4139a0352, type: 3}
       propertyPath: showHealthFromStart

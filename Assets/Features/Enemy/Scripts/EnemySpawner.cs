@@ -17,9 +17,9 @@ namespace Features.Enemy.Scripts
         [SerializeField] private FactoriesDataScriptableObject enemyFactoriesData;
 
         private Dictionary<Factory, bool> factoriesCountdownDictionary;
-
         public static EnemySpawner Instance { get; private set; }
         public event EventHandler OnSpawnCountChanged;
+
         #endregion
 
         #region Private Methods
@@ -69,6 +69,16 @@ namespace Features.Enemy.Scripts
             return null;
         }
 
+        private GameObject PickRandomSpawnPosition(FactoriesDataScriptableObject.FactorySpawnData factoryData)
+        {
+            if (factoryData.spawnPositionList == null || factoryData.spawnPositionList.Count == 0)
+            {
+                return null;
+            }
+
+            return factoryData.spawnPositionList[Random.Range(0, factoryData.spawnPositionList.Count)];
+        }
+
         private void SpawnObject()
         {
             if (!GameManager.Instance.IsGamePlaying())
@@ -82,8 +92,8 @@ namespace Features.Enemy.Scripts
                 return;
             }
 
-            //No other way to compare if the Runtime spawn position Prefab is the same as the Asset Prefab T_T
-            Transform factorySpawnPoint = GameObject.Find(factoryData.spawnPosition.name).transform;
+            //No other way to find the position GameObject in the runtime (Scriptable Object not allows a reference Hierarchy game object)
+            Transform factorySpawnPoint = GameObject.Find(PickRandomSpawnPosition(factoryData).name).transform;
 
             //float randomX = factorySpawnPoint.position.x + Random.Range(-factorySpawnPoint.localScale.x, factorySpawnPoint.localScale.x);
 
@@ -103,7 +113,7 @@ namespace Features.Enemy.Scripts
 
             factoryData.spawnCount--;
             OnSpawnCountChanged?.Invoke(this, EventArgs.Empty);
-            factoryData.factoryType.GetProduct(spawnPos);
+            factoryData.factoryType.GetProduct(spawnPos, factorySpawnPoint.rotation);
 
             // Each Factory will have its own cooldown, store in a dictionary. When GetProduct() got called, start the cooldown on that factory.
             StartCoroutine(GetProductRoutine(factoryData));

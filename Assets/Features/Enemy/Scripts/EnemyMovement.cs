@@ -48,7 +48,8 @@ namespace Features.Enemy.Scripts
 
         private void HandleEnemyMovement(Vector3 direction)
         {
-            enemyRigidbody.MovePosition(enemyRigidbody.position + direction * (moveSpeed * Time.fixedDeltaTime));
+            float gameSpeed = GameManager.Instance.GameSpeedMultiplier();
+            enemyRigidbody.MovePosition(enemyRigidbody.position + direction * (moveSpeed * gameSpeed * Time.fixedDeltaTime));
         }
 
         private void HandleEnemyRotation(Vector3 direction)

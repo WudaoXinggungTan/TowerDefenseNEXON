@@ -41,26 +41,19 @@ namespace Features.Projectile.Scripts
 
         public void FixedUpdate()
         {
-            if (Target == null)
+            if (Target == null || !Target.activeInHierarchy)
             {
+                ReturnToObjectPool();
                 return;
             }
 
-            if (Target.gameObject.activeInHierarchy)
-            {
-                Vector3 targetPosition = Target.transform.position;
-                Vector3 direction = (targetPosition - transform.position).normalized;
+            Vector3 targetPosition = Target.transform.position;
+            Vector3 direction = (targetPosition - transform.position).normalized;
 
-                projectileRigidbody.MovePosition(projectileRigidbody.position + direction * (speed * Time.fixedDeltaTime));
-                if (targetPosition != projectileRigidbody.position)
-                {
-                    transform.LookAt(targetPosition);
-                }
-            }
-            else
+            projectileRigidbody.MovePosition(projectileRigidbody.position + direction * (speed * Time.fixedDeltaTime));
+            if (targetPosition != projectileRigidbody.position)
             {
-                // If the target already died, return this (still flying) projectile to the pool
-                ReturnToObjectPool();
+                transform.LookAt(targetPosition);
             }
         }
 

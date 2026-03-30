@@ -1,6 +1,7 @@
 using Features.Core.Scripts;
 using Features.Core.Scripts.Interface;
 using Features.Projectile.Scripts;
+using UnityEngine;
 
 namespace Features.Buildings.Scripts
 {
@@ -8,7 +9,7 @@ namespace Features.Buildings.Scripts
     {
         protected override void Attacking()
         {
-            IProduct product = projectileFactory.GetProduct(projectileFirePosition.position);
+            IProduct product = projectileFactory.GetProduct(projectileFirePosition.position, projectileFirePosition.transform.rotation);
 
             if (product is ProjectileProduct projectile)
             {

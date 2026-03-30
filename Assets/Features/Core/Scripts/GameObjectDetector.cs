@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Features.Core.Scripts
@@ -13,9 +12,9 @@ namespace Features.Core.Scripts
         [SerializeField] private float detectionRadius = 10f;
         [SerializeField] private float detectionInterval = 0.25f; // Roughly 15 frames at 60 FPS
 
-        private HashSet<GameObject> gameObjects;
+        private List<GameObject> detectedGameObjectList;
 
-        public event Action<HashSet<GameObject>> OnGameObjectsDetected;
+        public event Action<List<GameObject>> OnGameObjectsDetected;
 
         #endregion
 
@@ -23,7 +22,7 @@ namespace Features.Core.Scripts
 
         private void Awake()
         {
-            gameObjects = new HashSet<GameObject>();
+            detectedGameObjectList = new List<GameObject>();
         }
 
         private void Start()
@@ -39,7 +38,7 @@ namespace Features.Core.Scripts
                 return;
             }
 
-            gameObjects.Clear();
+            detectedGameObjectList.Clear();
 
             Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, detectionLayer);
 
@@ -47,11 +46,11 @@ namespace Features.Core.Scripts
             {
                 if (((1 << col.gameObject.layer) & detectionLayer) != 0)
                 {
-                    gameObjects.Add(col.gameObject);
+                    detectedGameObjectList.Add(col.gameObject);
                 }
             }
 
-            OnGameObjectsDetected?.Invoke(gameObjects);
+            OnGameObjectsDetected?.Invoke(detectedGameObjectList);
         }
 
         private void OnDisable()

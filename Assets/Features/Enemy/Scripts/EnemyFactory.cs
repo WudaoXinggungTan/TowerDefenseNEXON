@@ -15,10 +15,10 @@ namespace Features.Enemy.Scripts
 
         #region Public Methods
 
-        public override IProduct GetProduct(Vector3 position)
+        public override IProduct GetProduct(Vector3 position, Quaternion quaternion)
         {
             // Use ObjectPool
-            GameObject instance = ObjectPoolManager.Instance.SpawnObject(enemyPrefab.gameObject, position, Quaternion.identity);
+            GameObject instance = ObjectPoolManager.Instance.SpawnObject(enemyPrefab.gameObject, position, quaternion);
             EnemyProduct newProduct = instance.GetComponent<EnemyProduct>();
             //  each product contains its own logic
             newProduct.Initialize();

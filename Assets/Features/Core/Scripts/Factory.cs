@@ -6,7 +6,7 @@ namespace Features.Core.Scripts
     {
         #region Public Methods
 
-        public abstract Interface.IProduct GetProduct(Vector3 position);
+        public abstract Interface.IProduct GetProduct(Vector3 position, Quaternion rotation);
 
         #endregion
     }

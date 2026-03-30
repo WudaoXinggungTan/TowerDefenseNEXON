@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Projectile.Scripts.ProjectileProduct
   speed: 10
-  projectileDamage: 0.25
+  projectileDamage: 1
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 520

@@ -17,7 +17,7 @@ namespace Features.Core.Scripts
             [Range(0, 100)] public int probability = 0;
             public float cooldown = 1f;
 
-            public GameObject spawnPosition;
+            public List<GameObject> spawnPositionList;
             public int spawnCount = 100;
 
             #endregion

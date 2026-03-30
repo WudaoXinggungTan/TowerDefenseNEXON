@@ -39,15 +39,20 @@ namespace Features.Enemy.Scripts
 
             if (enemyHealth <= 0f)
             {
-                OnEnemyDies?.Invoke(currencyDropAmount, transform.position);
-                if (isReleased)
-                {
-                    return;
-                }
-
-                isReleased = true;
-                ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
+                HandleEnemyDeath();
             }
+        }
+
+        private void HandleEnemyDeath()
+        {
+            OnEnemyDies?.Invoke(currencyDropAmount, transform.position);
+            if (isReleased)
+            {
+                return;
+            }
+
+            isReleased = true;
+            ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
         }
 
         #endregion

@@ -46,7 +46,7 @@ namespace Features.Tower.Scripts
             playerCurrency.ChangeCurrency(requireCurrency);
 
             isSpawned = true;
-            towerFactory.GetProduct(towerSpawnPosition.transform.position);
+            towerFactory.GetProduct(towerSpawnPosition.transform.position, towerSpawnPosition.transform.rotation);
             detector.Destroy();
         }
 

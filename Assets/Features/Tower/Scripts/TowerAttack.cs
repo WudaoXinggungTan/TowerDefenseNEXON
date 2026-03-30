@@ -8,7 +8,7 @@ namespace Features.Tower.Scripts
     {
         protected override void Attacking()
         {
-            IProduct product = projectileFactory.GetProduct(projectileFirePosition.position);
+            IProduct product = projectileFactory.GetProduct(projectileFirePosition.position, projectileFirePosition.rotation);
 
             if (product is ProjectileProduct projectile)
             {

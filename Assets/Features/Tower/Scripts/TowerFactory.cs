@@ -14,10 +14,10 @@ namespace Features.Tower.Scripts
 
         #region Public Methods
 
-        public override IProduct GetProduct(Vector3 position)
+        public override IProduct GetProduct(Vector3 position, Quaternion quaternion)
         {
             // Use ObjectPool
-            GameObject instance = ObjectPoolManager.Instance.SpawnObject(towerPrefab.gameObject, position, Quaternion.identity);
+            GameObject instance = ObjectPoolManager.Instance.SpawnObject(towerPrefab.gameObject, position, quaternion);
             TowerProduct newProduct = instance.GetComponent<TowerProduct>();
             //  each product contains its own logic
             newProduct.Initialize();

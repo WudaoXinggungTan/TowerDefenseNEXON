@@ -22,9 +22,9 @@ namespace Features.Currency.Scripts
 
         private void HandleEnemyDeath(int amount, Vector3 enemyPosition)
         {
-            for (int i = 0; i <= amount; i++)
+            for (int i = 0; i < amount; i++)
             {
-                currencyFactory.GetProduct(enemyPosition);
+                currencyFactory.GetProduct(enemyPosition, new Quaternion());
             }
         }
 

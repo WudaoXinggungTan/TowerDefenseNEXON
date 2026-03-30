@@ -14,10 +14,10 @@ namespace Features.Currency.Scripts
 
         #region Public Methods
 
-        public override IProduct GetProduct(Vector3 position)
+        public override IProduct GetProduct(Vector3 position, Quaternion quaternion)
         {
             // Use ObjectPool
-            GameObject instance = ObjectPoolManager.Instance.SpawnObject(currencyPrefab.gameObject, position, Quaternion.identity);
+            GameObject instance = ObjectPoolManager.Instance.SpawnObject(currencyPrefab.gameObject, position, quaternion);
             CurrencyProduct newProduct = instance.GetComponent<CurrencyProduct>();
             //  each product contains its own logic
             newProduct.Initialize();

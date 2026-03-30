@@ -10,7 +10,7 @@ namespace Features.Player.Scripts
         [SerializeField] private int playerInitialCurrency;
 
         public int PlayerCurrentCurrency { get; private set; }
-        public event EventHandler<int> OnCurrentCurrencyChanged;
+        public static event EventHandler<int> OnCurrentCurrencyChanged;
 
         #endregion
 

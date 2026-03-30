@@ -19,7 +19,7 @@ namespace Features.Core.Scripts
         public State state;
 
         private readonly float maxSpeedMultiplier = 2f;
-        private readonly float speedIncreaseAmount = .1f;
+        private readonly float speedIncreaseAmount = .01f;
         private float gameSpeedMultiplier = 1f;
         private float currentPlaytime = 0f;
 
@@ -45,13 +45,25 @@ namespace Features.Core.Scripts
             OnGameStateChanged?.Invoke(this, state);
         }
 
-        private void Update() { UpdatePlaytime(); }
+        private void Update()
+        {
+            UpdateGameSpeed();
+            UpdatePlaytime();
+        }
 
         private void UpdatePlaytime()
         {
             if (IsGamePlaying())
             {
                 currentPlaytime += Time.deltaTime;
+            }
+        }
+
+        private void UpdateGameSpeed()
+        {
+            if (gameSpeedMultiplier <= maxSpeedMultiplier)
+            {
+                gameSpeedMultiplier += speedIncreaseAmount;
             }
         }
 

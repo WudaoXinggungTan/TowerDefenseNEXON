@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   projectileFactory: {fileID: 6370595267461341711, guid: 01a14ae0191b1c349a2ba1af9d185db1, type: 3}
   projectileFirePosition: {fileID: 5747103797742810938}
-  attackRate: 1
+  attackRate: 2
 --- !u!114 &5353601324080928910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a63e927a3aa61d049bccb677e103dae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Player.Scripts.PlayerCurrency
-  playerInitialCurrency: 50
+  playerInitialCurrency: 0
 --- !u!1001 &2374235375430042771
 PrefabInstance:
   m_ObjectHideFlags: 0

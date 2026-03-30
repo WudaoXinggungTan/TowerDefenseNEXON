@@ -533,7 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c14299baa4bca4d8e3430ac6e5bd79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Buildings.Scripts.MainBuildingHealth
-  mainBuildingMaxHealth: 10
+  mainBuildingMaxHealth: 200
 --- !u!65 &4660890064314771701
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6950,7 +6950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4045763512671880199, guid: 2befa8bb6a96fa949a505ba4139a0352, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4045763512671880199, guid: 2befa8bb6a96fa949a505ba4139a0352, type: 3}
       propertyPath: m_Color.g
