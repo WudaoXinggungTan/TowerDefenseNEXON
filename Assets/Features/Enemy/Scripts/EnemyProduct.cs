@@ -36,6 +36,7 @@ namespace Features.Enemy.Scripts
         {
             enemyHealth -= amount;
             OnProgressChanged?.Invoke(this, new IHasProgress.ProgressChangedEventArgs { ProgressAmount = (enemyHealth / enemyMaxHealth) });
+            SoundManager.Instance.PlaySound(AudioClipRefsScriptableObject.Instance.projectileHit, transform.position);
 
             if (enemyHealth <= 0f)
             {
@@ -46,6 +47,8 @@ namespace Features.Enemy.Scripts
         private void HandleEnemyDeath()
         {
             OnEnemyDies?.Invoke(currencyDropAmount, transform.position);
+            SoundManager.Instance.PlaySound(AudioClipRefsScriptableObject.Instance.enemyDeath, transform.position);
+
             if (isReleased)
             {
                 return;

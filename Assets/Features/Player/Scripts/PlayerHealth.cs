@@ -31,6 +31,7 @@ namespace Features.Player.Scripts
         {
             playerHealth -= amount;
             OnProgressChanged?.Invoke(this, new IHasProgress.ProgressChangedEventArgs { ProgressAmount = (playerHealth / playerMaxHealth) });
+            SoundManager.Instance.PlaySound(AudioClipRefsScriptableObject.Instance.projectileHit, transform.position);
 
             if (playerHealth <= 0f)
             {

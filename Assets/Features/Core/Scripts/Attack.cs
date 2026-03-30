@@ -1,10 +1,12 @@
+using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Features.Core.Scripts
 {
     [RequireComponent(typeof(GameObjectDetector))]
-    public abstract class Attack : MonoBehaviour
+    public class Attack : MonoBehaviour
     {
         #region Variables
 
@@ -18,6 +20,9 @@ namespace Features.Core.Scripts
 
         private float nearestDistanceToTarget;
         private float distanceToTarget;
+
+        [CanBeNull]
+        public static event EventHandler OnAttack;
 
         #endregion
 
@@ -103,7 +108,10 @@ namespace Features.Core.Scripts
 
         #region Protected Methods
 
-        protected abstract void Attacking();
+        protected virtual void Attacking()
+        {
+            OnAttack?.Invoke(this, EventArgs.Empty);
+        }
 
         #endregion
     }

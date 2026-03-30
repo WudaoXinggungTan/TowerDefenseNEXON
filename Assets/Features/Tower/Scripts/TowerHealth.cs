@@ -31,7 +31,7 @@ namespace Features.Tower.Scripts
         {
             towerHealth -= amount;
             OnProgressChanged?.Invoke(this, new IHasProgress.ProgressChangedEventArgs { ProgressAmount = (towerHealth / towerMaxHealth) });
-
+            SoundManager.Instance.PlaySound(AudioClipRefsScriptableObject.Instance.projectileHit, transform.position);
             if (towerHealth <= 0f)
             {
                 ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);

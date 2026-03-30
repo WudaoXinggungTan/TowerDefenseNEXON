@@ -9,6 +9,8 @@ namespace Features.Enemy.Scripts
     {
         protected override void Attacking()
         {
+            base.Attacking();
+
             IProduct product = projectileFactory.GetProduct(projectileFirePosition.position, projectileFirePosition.rotation);
 
             if (product is ProjectileProduct projectile)

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca1f1c8d141ef3439ec857f591f8a42, type: 3}
+  m_Name: AudioClipRefs
+  m_EditorClassIdentifier: Assembly-CSharp::Features.Core.Scripts.AudioClipRefsScriptableObject
+  projectileHit:
+  - {fileID: 8300000, guid: ccdd4c4de66a6ad448566ece07644f13, type: 3}
+  projectileShoot:
+  - {fileID: 8300000, guid: 9e37844fca58fbb4489bce184757ea3c, type: 3}
+  enemyDeath:
+  - {fileID: 8300000, guid: 2b6c06a7454ab674f8619501fa0879ed, type: 3}
+  currencyCollect:
+  - {fileID: 8300000, guid: 8370a19e4241a0049bbabf65c879cc66, type: 3}
+  currencyDrop:
+  - {fileID: 8300000, guid: 0b612dc506813d141baac4c41773307c, type: 3}
+  towerSpawn:
+  - {fileID: 8300000, guid: d5e0192d72104984ba4cf7b1a996c77d, type: 3}

@@ -30,6 +30,7 @@ namespace Features.Buildings.Scripts
         {
             mainBuildingHealth -= amount;
             OnProgressChanged?.Invoke(this, new IHasProgress.ProgressChangedEventArgs { ProgressAmount = (mainBuildingHealth / mainBuildingMaxHealth) });
+            SoundManager.Instance.PlaySound(AudioClipRefsScriptableObject.Instance.projectileHit, transform.position);
 
             if (mainBuildingHealth <= 0f)
             {

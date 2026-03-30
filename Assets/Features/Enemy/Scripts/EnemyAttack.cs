@@ -11,6 +11,8 @@ namespace Features.Enemy.Scripts
 
         protected override void Attacking()
         {
+            base.Attacking();
+
             if (CurrentTarget.GetComponent<IDamageable>() == null)
             {
                 return;

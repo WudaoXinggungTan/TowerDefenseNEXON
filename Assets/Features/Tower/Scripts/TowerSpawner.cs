@@ -47,6 +47,7 @@ namespace Features.Tower.Scripts
 
             isSpawned = true;
             towerFactory.GetProduct(towerSpawnPosition.transform.position, towerSpawnPosition.transform.rotation);
+            SoundManager.Instance.PlaySound(AudioClipRefsScriptableObject.Instance.towerSpawn, transform.position);
             detector.Destroy();
         }
 

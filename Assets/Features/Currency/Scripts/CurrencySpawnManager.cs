@@ -26,6 +26,7 @@ namespace Features.Currency.Scripts
             {
                 currencyFactory.GetProduct(enemyPosition, new Quaternion());
             }
+            SoundManager.Instance.PlaySound(AudioClipRefsScriptableObject.Instance.currencyDrop, transform.position);
         }
 
         #endregion

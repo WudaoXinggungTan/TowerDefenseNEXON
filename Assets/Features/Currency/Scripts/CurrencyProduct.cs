@@ -90,6 +90,7 @@ namespace Features.Currency.Scripts
             {
                 playerGameObject.GetComponent<PlayerCurrency>().ChangeCurrency(currencyAmount, false);
                 isReturned = true;
+                SoundManager.Instance.PlaySound(AudioClipRefsScriptableObject.Instance.currencyCollect, transform.position);
                 ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
             }
         }
