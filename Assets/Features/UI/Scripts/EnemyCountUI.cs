@@ -17,42 +17,34 @@ namespace Features.UI.Scripts
 
         [SerializeField] private FactoriesDataScriptableObject factoriesData;
 
-        private int totalEnemiesCount;
-
         #endregion
 
         #region Private Methods
 
-        private void Awake()
-        {
-            totalEnemiesCount = factoriesData.GetTotalSpawnCount();
-        }
-
         private void Start()
         {
-            UpdateEnemyCountText();
+            InitializeEnemyCountText();
             EnemyProduct.OnEnemyDies += DecrementEnemyCount;
         }
 
         private void DecrementEnemyCount(int currency, Vector3 position)
         {
-            if (totalEnemiesCount < 0)
-            {
-                return;
-            }
-
-            totalEnemiesCount--;
             UpdateEnemyCountText();
 
-            if (totalEnemiesCount == 0)
+            if (factoriesData.GetCurrentEnemyCount() <= 0)
             {
                 GameManager.Instance.EndTheGame();
             }
         }
 
+        private void InitializeEnemyCountText()
+        {
+            enemyCountText.text = Convert.ToString(factoriesData.GetTotalSpawnCount());
+        }
+
         private void UpdateEnemyCountText()
         {
-            enemyCountText.text = Convert.ToString(totalEnemiesCount);
+            enemyCountText.text = Convert.ToString(factoriesData.GetCurrentEnemyCount());
         }
 
         private void Show()

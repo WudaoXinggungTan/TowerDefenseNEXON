@@ -148,12 +148,12 @@ namespace Features.Enemy.Scripts
             }
 
             // If that factory is out of product count
-            if (factoryData.spawnCount <= 0)
+            if (factoryData.remainingEnemyCount <= 0)
             {
                 return;
             }
 
-            factoryData.spawnCount--;
+            factoryData.remainingEnemyCount--;
             OnSpawnCountChanged?.Invoke(this, EventArgs.Empty);
             factoryData.factoryType.GetProduct(spawnPos, factorySpawnPoint.rotation);
 

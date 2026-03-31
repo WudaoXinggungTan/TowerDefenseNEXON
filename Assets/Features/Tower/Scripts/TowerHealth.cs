@@ -18,7 +18,7 @@ namespace Features.Tower.Scripts
 
         #region Private Methods
 
-        private void Start()
+        private void OnEnable()
         {
             towerHealth = towerMaxHealth;
         }

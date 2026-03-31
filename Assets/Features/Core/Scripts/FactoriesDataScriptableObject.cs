@@ -19,7 +19,7 @@ namespace Features.Core.Scripts
 
             public List<GameObject> spawnPositionList;
             public int initialEnemySpawnCount = 100;
-            [HideInInspector] public int spawnCount;
+            [HideInInspector] public int remainingEnemyCount;
 
             #endregion
 
@@ -47,12 +47,22 @@ namespace Features.Core.Scripts
             }
 
             return totalSpawnCount;
+        }        
+        public int GetCurrentEnemyCount()
+        {
+            int currentEnemyCount = 0;
+            foreach (var factorySpawnData in factoriesList)
+            {
+                currentEnemyCount += factorySpawnData.remainingEnemyCount;
+            }
+
+            return currentEnemyCount;
         }
         public void ResetSpawnCounts()
         {
             foreach (var factoryData in factoriesList)
             {
-                factoryData.spawnCount = factoryData.initialEnemySpawnCount;
+                factoryData.remainingEnemyCount = factoryData.initialEnemySpawnCount;
             }
         }
     }
