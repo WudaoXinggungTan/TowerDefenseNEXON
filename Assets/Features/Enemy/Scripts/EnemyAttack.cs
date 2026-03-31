@@ -13,12 +13,10 @@ namespace Features.Enemy.Scripts
         {
             base.Attacking();
 
-            if (CurrentTarget.GetComponent<IDamageable>() == null)
+            if (CurrentTarget.GetComponent<IDamageable>() != null)
             {
-                return;
+                CurrentTarget.GetComponent<IDamageable>().Damage(enemyDamage);
             }
-
-            CurrentTarget.GetComponent<IDamageable>().Damage(enemyDamage);
         }
     }
 }

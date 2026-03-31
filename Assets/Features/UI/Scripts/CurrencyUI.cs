@@ -20,18 +20,24 @@ namespace Features.UI.Scripts
         private void Start()
         {
             Show();
-            PlayerCurrency.OnCurrentCurrencyChanged += (sender, currency) =>
-            {
-                UpdateCurrencyText(currency);
-            };
+            PlayerCurrency.OnCurrentCurrencyChanged += PlayerCurrency_OnCurrentCurrencyChanged;
+        }
+
+        private void PlayerCurrency_OnCurrentCurrencyChanged(object sender, int currency)
+        {
+            UpdateCurrencyText(currency);
+        }
+
+        private void OnDestroy()
+        {
+            PlayerCurrency.OnCurrentCurrencyChanged -= PlayerCurrency_OnCurrentCurrencyChanged;
         }
 
         private void UpdateCurrencyText(int currency)
         {
             currencyText.text = Convert.ToString(currency);
         }
-
-
+        
         private void Show()
         {
             gameObject.SetActive(true);

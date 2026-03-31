@@ -26,7 +26,7 @@ namespace Features.Enemy.Scripts
             enemyRigidbody = GetComponent<Rigidbody>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
             destination = GameObject.Find("Destination");
         }
@@ -34,6 +34,11 @@ namespace Features.Enemy.Scripts
         private void FixedUpdate()
         {
             if (!GameManager.Instance.IsGamePlaying())
+            {
+                return;
+            }
+
+            if (destination == null)
             {
                 return;
             }

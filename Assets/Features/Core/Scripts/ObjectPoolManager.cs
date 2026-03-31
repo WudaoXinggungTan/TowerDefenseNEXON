@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
 
@@ -20,8 +21,7 @@ namespace Features.Core.Scripts
         private GameObject particleSystemsEmpty;
         private GameObject soundFXEmpty;
 
-        private Dictionary<GameObject, ObjectPool<GameObject>> objectPools =
-            new Dictionary<GameObject, ObjectPool<GameObject>>();
+        private Dictionary<GameObject, ObjectPool<GameObject>> objectPools = new Dictionary<GameObject, ObjectPool<GameObject>>();
 
         private Dictionary<GameObject, GameObject> cloneToPrefabMap = new Dictionary<GameObject, GameObject>();
 
@@ -43,14 +43,23 @@ namespace Features.Core.Scripts
             if (Instance == null)
             {
                 Instance = this;
-            }
+                if (addToDontDestroyOnLoad)
+                {
+                    DontDestroyOnLoad(gameObject);
+                }
 
-            SetupEmpties();
+                SetupEmpties();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         private void SetupEmpties()
         {
             emptyHolder = new GameObject("Object Pools");
+            emptyHolder.transform.SetParent(transform);
 
             gameObjectsEmpty = new GameObject("Game Objects");
             gameObjectsEmpty.transform.SetParent(emptyHolder.transform);
@@ -60,22 +69,12 @@ namespace Features.Core.Scripts
 
             soundFXEmpty = new GameObject("Sound Effects");
             soundFXEmpty.transform.SetParent(emptyHolder.transform);
-
-            if (addToDontDestroyOnLoad)
-            {
-                DontDestroyOnLoad(gameObjectsEmpty.transform.root);
-            }
         }
 
 
-        private void CreatePool(GameObject prefab, Vector3 position, Quaternion rotation,
-                                PoolType   poolType = PoolType.GameObjects)
+        private void CreatePool(GameObject prefab, Vector3 position, Quaternion rotation, PoolType poolType = PoolType.GameObjects)
         {
-            ObjectPool<GameObject> pool =
-                new ObjectPool<GameObject>(createFunc: () => CreateGameObject(prefab, position, rotation, poolType),
-                                           actionOnGet: OnGetGameObject, actionOnDestroy: OnDestroyGameObject,
-                                           actionOnRelease: OnReleaseGameObject, collectionCheck: true,
-                                           defaultCapacity: 10, maxSize: 100);
+            ObjectPool<GameObject> pool = new ObjectPool<GameObject>(createFunc: () => CreateGameObject(prefab, position, rotation, poolType), actionOnGet: OnGetGameObject, actionOnDestroy: OnDestroyGameObject, actionOnRelease: OnReleaseGameObject, collectionCheck: true, defaultCapacity: 10, maxSize: 100);
             objectPools.Add(prefab, pool);
 
 
@@ -116,21 +115,15 @@ namespace Features.Core.Scripts
             */
         }
 
-        private void CreatePool(GameObject prefab, Transform parent, Quaternion rotation,
-                                PoolType   poolType = PoolType.GameObjects)
+        private void CreatePool(GameObject prefab, Transform parent, Quaternion rotation, PoolType poolType = PoolType.GameObjects)
         {
             // Need to learn more about Delegate to understand this Constructor!
-            ObjectPool<GameObject> pool =
-                new ObjectPool<GameObject>(createFunc: () => CreateGameObject(prefab, parent, rotation, poolType),
-                                           actionOnGet: OnGetGameObject, actionOnDestroy: OnDestroyGameObject,
-                                           actionOnRelease: OnReleaseGameObject, collectionCheck: true,
-                                           defaultCapacity: 10, maxSize: 100);
+            ObjectPool<GameObject> pool = new ObjectPool<GameObject>(createFunc: () => CreateGameObject(prefab, parent, rotation, poolType), actionOnGet: OnGetGameObject, actionOnDestroy: OnDestroyGameObject, actionOnRelease: OnReleaseGameObject, collectionCheck: true, defaultCapacity: 10, maxSize: 100);
 
             objectPools.Add(prefab, pool);
         }
 
-        private GameObject CreateGameObject(GameObject prefab, Vector3 position, Quaternion rotation,
-                                            PoolType   poolType = PoolType.GameObjects)
+        private GameObject CreateGameObject(GameObject prefab, Vector3 position, Quaternion rotation, PoolType poolType = PoolType.GameObjects)
         {
             prefab.SetActive(false);
 
@@ -143,8 +136,7 @@ namespace Features.Core.Scripts
             return gameObj;
         }
 
-        private GameObject CreateGameObject(GameObject prefab, Transform parent, Quaternion rotation,
-                                            PoolType   poolType = PoolType.GameObjects)
+        private GameObject CreateGameObject(GameObject prefab, Transform parent, Quaternion rotation, PoolType poolType = PoolType.GameObjects)
         {
             prefab.SetActive(false);
 
@@ -189,8 +181,7 @@ namespace Features.Core.Scripts
         }
 
         // ---------------------------------------------- Vector3 ------------------------------------------------------
-        private T SpawnObject<T>(GameObject originalPrefab, Vector3 position, Quaternion rotation,
-                                 PoolType   poolType = PoolType.GameObjects) where T : Object
+        private T SpawnObject<T>(GameObject originalPrefab, Vector3 position, Quaternion rotation, PoolType poolType = PoolType.GameObjects) where T : Object
         {
             if (!objectPools.ContainsKey(originalPrefab))
             {
@@ -228,30 +219,9 @@ namespace Features.Core.Scripts
             return null;
         }
 
-        #endregion
-
-        #region Pulic Methods
-
-        public T SpawnObject<T>(T        typePrefab, Vector3 position, Quaternion rotation,
-                                PoolType poolType = PoolType.GameObjects) where T : Component
-        {
-            return SpawnObject<T>(typePrefab.gameObject, position, rotation, poolType);
-        }
-
-        public GameObject SpawnObject(GameObject originalPrefab, Vector3 position, Quaternion rotation,
-                                      PoolType   poolType = PoolType.GameObjects)
-        {
-            return SpawnObject<GameObject>(originalPrefab, position, rotation, poolType);
-        }
-
-        #endregion
-
-        #region Private Methods
-
         // ---------------------------------------------- Parent ------------------------------------------------------
 
-        private T SpawnObject<T>(GameObject originalPrefab, Transform parent, Quaternion rotation,
-                                 PoolType   poolType = PoolType.GameObjects) where T : Object
+        private T SpawnObject<T>(GameObject originalPrefab, Transform parent, Quaternion rotation, PoolType poolType = PoolType.GameObjects) where T : Object
         {
             if (!objectPools.ContainsKey(originalPrefab))
             {
@@ -270,7 +240,7 @@ namespace Features.Core.Scripts
                 gameObj.transform.SetParent(parent);
                 gameObj.transform.localPosition = Vector3.zero;
                 gameObj.transform.localRotation = rotation;
-                gameObj.transform.localScale    = Vector3.one;
+                gameObj.transform.localScale = Vector3.one;
 
                 gameObj.SetActive(true);
 
@@ -297,21 +267,30 @@ namespace Features.Core.Scripts
 
         #region Pulic Methods
 
-        public T SpawnObject<T>(T        typePrefab, Transform parent, Quaternion rotation,
-                                PoolType poolType = PoolType.GameObjects) where T : Component
+        public T SpawnObject<T>(T typePrefab, Vector3 position, Quaternion rotation, PoolType poolType = PoolType.GameObjects) where T : Component
+        {
+            return SpawnObject<T>(typePrefab.gameObject, position, rotation, poolType);
+        }
+
+        public GameObject SpawnObject(GameObject originalPrefab, Vector3 position, Quaternion rotation, PoolType poolType = PoolType.GameObjects)
+        {
+            return SpawnObject<GameObject>(originalPrefab, position, rotation, poolType);
+        }
+
+
+        public T SpawnObject<T>(T typePrefab, Transform parent, Quaternion rotation, PoolType poolType = PoolType.GameObjects) where T : Component
         {
             return SpawnObject<T>(typePrefab.gameObject, parent, rotation, poolType);
         }
 
-        public GameObject SpawnObject(GameObject originalPrefab, Transform parent, Quaternion rotation,
-                                      PoolType   poolType = PoolType.GameObjects)
+        public GameObject SpawnObject(GameObject originalPrefab, Transform parent, Quaternion rotation, PoolType poolType = PoolType.GameObjects)
         {
             return SpawnObject<GameObject>(originalPrefab, parent, rotation, poolType);
         }
 
-        public void ReturnObjectToPool(GameObject gameObj, PoolType poolType = PoolType.GameObjects)    
+        public void ReturnObjectToPool(GameObject gameObj, PoolType poolType = PoolType.GameObjects)
         {
-            if (cloneToPrefabMap.TryGetValue(gameObj, out GameObject prefab))
+            if (cloneToPrefabMap.Remove(gameObj, out GameObject prefab))
             {
                 GameObject parentObject = SetParentObject(poolType);
 
@@ -327,7 +306,39 @@ namespace Features.Core.Scripts
             }
             else
             {
-                Debug.LogError($"Trying to return an object that is not pooled: {gameObj.name}");
+                // If it's not in the map, it means it was already returned or isn't pooled, so we do nothing.
+            }
+        }
+
+        #endregion
+
+        #region Scene Load
+
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            ReturnAllObjectsToPool();
+        }
+
+        public void ReturnAllObjectsToPool()
+        {
+            List<GameObject> activeObjects = new List<GameObject>(cloneToPrefabMap.Keys);
+
+            foreach (GameObject obj in activeObjects)
+            {
+                if (obj != null)
+                {
+                    ReturnObjectToPool(obj);
+                }
             }
         }
 

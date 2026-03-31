@@ -36,10 +36,6 @@ namespace Features.Currency.Scripts
         private void OnEnable()
         {
             isReturned = false; // Reset when reused from pool
-        }
-
-        private void Start()
-        {
             playerGameObject = GameObject.Find("Player");
         }
 

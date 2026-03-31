@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 using Features.Core.Scripts;
 
@@ -11,8 +12,10 @@ namespace Features.Enemy.Scripts
     {
         #region Variables
 
+        [Tooltip("The enemy will spawn after 'x' amount of time delay")]
         [SerializeField] private float timeDelay = 1f;
-        [SerializeField] private float repeatRate = 1f;
+        [Tooltip("How fast the system will keep trying to spawn enemy")]
+        [SerializeField] private float repeatRate = .1f;
 
         [SerializeField] private FactoriesDataScriptableObject enemyFactoriesData;
 
@@ -29,6 +32,12 @@ namespace Features.Enemy.Scripts
             if (Instance == null)
             {
                 Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+                return;
             }
 
             factoriesCountdownDictionary = new Dictionary<Factory, bool>();
@@ -37,14 +46,47 @@ namespace Features.Enemy.Scripts
         private void Start()
         {
             InvokeRepeating(nameof(SpawnObject), timeDelay, repeatRate);
+        }
+
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (enemyFactoriesData != null)
+            {
+                enemyFactoriesData.ResetSpawnCounts();
+
+                OnSpawnCountChanged?.Invoke(this, EventArgs.Empty);
+            }
+
             MapKeyValueDictionary();
         }
 
         private void MapKeyValueDictionary()
         {
+            if (factoriesCountdownDictionary == null)
+            {
+                factoriesCountdownDictionary = new Dictionary<Factory, bool>();
+            }
+            else
+            {
+                factoriesCountdownDictionary.Clear();
+            }
+
             foreach (FactoriesDataScriptableObject.FactorySpawnData factorySpawnData in enemyFactoriesData.factoriesList)
             {
-                factoriesCountdownDictionary[factorySpawnData.factoryType] = factorySpawnData.OnCooldown;
+                if (factorySpawnData.factoryType != null)
+                {
+                    factoriesCountdownDictionary[factorySpawnData.factoryType] = factorySpawnData.OnCooldown;
+                }
             }
         }
 

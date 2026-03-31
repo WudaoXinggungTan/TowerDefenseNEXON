@@ -23,13 +23,21 @@ namespace Features.Enemy.Scripts
 
         #endregion
 
+        #region Private Methods
+
+        private void OnEnable()
+        {
+            isReleased = false;
+            enemyHealth = enemyMaxHealth;
+        }
+
+        #endregion
+
         #region Interface Methods
 
         public void Initialize()
         {
             IsInitialized = true;
-            isReleased = false;
-            enemyHealth = enemyMaxHealth;
         }
 
         public void Damage(float amount)

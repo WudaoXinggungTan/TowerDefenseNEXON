@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Features.Core.Scripts.Interface;
@@ -27,18 +28,7 @@ namespace Features.UI.Scripts
             }
 
             progressBarImage.value = 1f;
-            hasProgress.OnProgressChanged += (sender, args) =>
-            {
-                progressBarImage.value = args.ProgressAmount;
-                if (args.ProgressAmount <= 0f)
-                {
-                    Hide();
-                }
-                else
-                {
-                    Show();
-                }
-            };
+            hasProgress.OnProgressChanged += HasProgress_OnProgressChanged;
 
             if (showHealthFromStart)
             {
@@ -48,6 +38,24 @@ namespace Features.UI.Scripts
             {
                 Hide();
             }
+        }
+
+        private void HasProgress_OnProgressChanged(object sender, IHasProgress.ProgressChangedEventArgs e)
+        {
+            progressBarImage.value = e.ProgressAmount;
+            if (e.ProgressAmount <= 0f)
+            {
+                Hide();
+            }
+            else
+            {
+                Show();
+            }
+        }
+
+        private void OnDestroy()
+        {
+            hasProgress.OnProgressChanged -= HasProgress_OnProgressChanged;
         }
 
         private void Show()

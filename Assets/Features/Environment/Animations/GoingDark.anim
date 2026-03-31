@@ -281,7 +281,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 3
-    functionName: RestartScene
+    functionName: InvokeEvent
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Features.Core.Scripts;
 
@@ -30,7 +31,17 @@ namespace Features.Player.Scripts
 
         private void Start()
         {
-            playerInput.Move += (direction) => { moveInputDirection = direction; };
+            playerInput.Move += PlayerInputOnMove;
+        }
+
+        private void PlayerInputOnMove(Vector2 direction)
+        {
+            moveInputDirection = direction;
+        }
+
+        private void OnDestroy()
+        {
+            playerInput.Move -= PlayerInputOnMove;
         }
 
         private void FixedUpdate()

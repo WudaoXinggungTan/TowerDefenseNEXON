@@ -25,7 +25,7 @@ namespace Features.Core.Scripts
             detectedGameObjectList = new List<GameObject>();
         }
 
-        private void Start()
+        private void OnEnable()
         {
             InvokeRepeating(nameof(DetectObjects), 0f, detectionInterval);
         }

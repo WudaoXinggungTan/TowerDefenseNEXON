@@ -28,13 +28,13 @@ namespace Features.Core.Scripts
 
         #region Private Methods
 
-        private void Start()
+        private void OnEnable()
         {
             gameObjectDetector = GetComponent<GameObjectDetector>();
-            gameObjectDetector.OnGameObjectsDetected += HandleOnGameObjectsDetected;
+            gameObjectDetector.OnGameObjectsDetected += SelectCurrentTarget;
         }
 
-        private void HandleOnGameObjectsDetected(List<GameObject> detectedGameObjectList)
+        private void SelectCurrentTarget(List<GameObject> detectedGameObjectList)
         {
             if (detectedGameObjectList.Count < 1)
             {
@@ -101,7 +101,7 @@ namespace Features.Core.Scripts
         private void OnDestroy()
         {
             if (gameObjectDetector != null)
-                gameObjectDetector.OnGameObjectsDetected -= HandleOnGameObjectsDetected;
+                gameObjectDetector.OnGameObjectsDetected -= SelectCurrentTarget;
         }
 
         #endregion

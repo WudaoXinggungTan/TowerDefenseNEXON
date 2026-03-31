@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Features.Core.Scripts;
 using Features.Player.Scripts;
@@ -26,6 +27,11 @@ namespace Features.Tower.Scripts
             {
                 detector.OnCollisionDetected += HandlePlayerCollision;
             }
+        }
+
+        private void OnDestroy()
+        {
+            detector.OnCollisionDetected -= HandlePlayerCollision;
         }
 
         private void HandlePlayerCollision(GameObject point, Collider other)

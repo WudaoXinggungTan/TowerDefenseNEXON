@@ -23,21 +23,31 @@ namespace Features.UI.Scripts
 
         #region Private Methods
 
+        private void Awake()
+        {
+            totalEnemiesCount = factoriesData.GetTotalSpawnCount();
+        }
+
         private void Start()
         {
-            Show();
-            totalEnemiesCount = factoriesData.GetTotalSpawnCount();
             UpdateEnemyCountText();
-            EnemyProduct.OnEnemyDies += (i, vector3) =>
-            {
-                totalEnemiesCount--;
-                UpdateEnemyCountText();
+            EnemyProduct.OnEnemyDies += DecrementEnemyCount;
+        }
 
-                if (totalEnemiesCount <= 0)
-                {
-                    GameManager.Instance.EndTheGame();
-                }
-            };
+        private void DecrementEnemyCount(int currency, Vector3 position)
+        {
+            if (totalEnemiesCount < 0)
+            {
+                return;
+            }
+
+            totalEnemiesCount--;
+            UpdateEnemyCountText();
+
+            if (totalEnemiesCount == 0)
+            {
+                GameManager.Instance.EndTheGame();
+            }
         }
 
         private void UpdateEnemyCountText()
@@ -53,6 +63,11 @@ namespace Features.UI.Scripts
         private void Hide()
         {
             gameObject.SetActive(false);
+        }
+
+        private void OnDestroy()
+        {
+            EnemyProduct.OnEnemyDies -= DecrementEnemyCount;
         }
 
         #endregion

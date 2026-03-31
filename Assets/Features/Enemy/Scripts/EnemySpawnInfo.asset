@@ -20,10 +20,12 @@ MonoBehaviour:
     - {fileID: 8881814129344006064, guid: e0e3a5aa13adb7341aec724f963ffe64, type: 3}
     - {fileID: 7423576808946070174, guid: 9d42327d530988d489e2fbc7361e983e, type: 3}
     - {fileID: 6262610710179808178, guid: 6c2a7aba56f789a42abebd674b50474f, type: 3}
-    spawnCount: 0
+    initialEnemySpawnCount: 90
+    spawnCount: 90
   - factoryType: {fileID: 4587346432720152666, guid: 4ce28198e58429342abd7e55f8008e6f, type: 3}
     probability: 10
     cooldown: 1
     spawnPositionList:
     - {fileID: 8881814129344006064, guid: e0e3a5aa13adb7341aec724f963ffe64, type: 3}
-    spawnCount: 0
+    initialEnemySpawnCount: 10
+    spawnCount: 10

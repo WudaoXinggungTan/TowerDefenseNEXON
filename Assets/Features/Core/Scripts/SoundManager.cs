@@ -6,6 +6,8 @@ namespace Features.Core.Scripts
 {
     public class SoundManager : MonoBehaviour
     {
+        #region Variables
+
         private const string PLAYER_PREFS_SOUND_EFFECTS_VOLUME_KEY = "SoundEffectsVolume";
         public static SoundManager Instance { get; private set; }
 
@@ -14,11 +16,21 @@ namespace Features.Core.Scripts
 
         private AudioSource audioSource;
 
+        #endregion
+
+        #region Private Methods
+
         private void Awake()
         {
             if (Instance == null)
             {
                 Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+                return;
             }
 
             audioSource = GetComponent<AudioSource>();
@@ -27,11 +39,22 @@ namespace Features.Core.Scripts
 
         private void Start()
         {
-            Attack.OnAttack += (sender, args) =>
-            {
-                PlaySound(audioClipRefsSO.projectileShoot, transform.position);
-            };
+            Attack.OnAttack += Attack_OnAttack;
         }
+
+        private void Attack_OnAttack(object sender, EventArgs e)
+        {
+            PlaySound(audioClipRefsSO.projectileShoot, transform.position);
+        }
+
+        private void OnDestroy()
+        {
+            Attack.OnAttack -= Attack_OnAttack;
+        }
+
+        #endregion
+
+        #region Public Methods
 
         public void PlaySound(AudioClip audioClip, Vector3 position, float volumeMultiplier = 1f)
         {
@@ -60,5 +83,7 @@ namespace Features.Core.Scripts
         {
             return volume;
         }
+
+        #endregion
     }
 }

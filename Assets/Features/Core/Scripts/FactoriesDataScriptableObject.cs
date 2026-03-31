@@ -18,7 +18,8 @@ namespace Features.Core.Scripts
             public float cooldown = 1f;
 
             public List<GameObject> spawnPositionList;
-            public int spawnCount = 100;
+            public int initialEnemySpawnCount = 100;
+            [HideInInspector] public int spawnCount;
 
             #endregion
 
@@ -42,10 +43,17 @@ namespace Features.Core.Scripts
             int totalSpawnCount = 0;
             foreach (var factorySpawnData in factoriesList)
             {
-                totalSpawnCount += factorySpawnData.spawnCount;
+                totalSpawnCount += factorySpawnData.initialEnemySpawnCount;
             }
 
             return totalSpawnCount;
+        }
+        public void ResetSpawnCounts()
+        {
+            foreach (var factoryData in factoriesList)
+            {
+                factoryData.spawnCount = factoryData.initialEnemySpawnCount;
+            }
         }
     }
 }
