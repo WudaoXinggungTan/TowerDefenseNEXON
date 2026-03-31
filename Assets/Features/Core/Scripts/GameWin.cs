@@ -27,7 +27,7 @@ namespace Features.Core.Scripts
             }
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             GameManager.Instance.OnGameStateChanged -= Instance_OnGameStateChanged;
         }

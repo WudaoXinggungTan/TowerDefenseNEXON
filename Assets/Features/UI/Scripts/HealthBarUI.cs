@@ -19,7 +19,7 @@ namespace Features.UI.Scripts
 
         #region Private Methods
 
-        private void Start()
+        private void OnEnable()
         {
             hasProgress = hasProgressGameObject.GetComponent<IHasProgress>();
             if (hasProgress == null)
@@ -53,19 +53,19 @@ namespace Features.UI.Scripts
             }
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             hasProgress.OnProgressChanged -= HasProgress_OnProgressChanged;
         }
 
         private void Show()
         {
-            gameObject.SetActive(true);
+            progressBarImage.gameObject.SetActive(true);
         }
 
         private void Hide()
         {
-            gameObject.SetActive(false);
+            progressBarImage.gameObject.SetActive(false);
         }
 
         #endregion

@@ -65,7 +65,7 @@ namespace Features.UI.Scripts
             gameObject.SetActive(false);
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             EnemyProduct.OnEnemyDies -= DecrementEnemyCount;
         }

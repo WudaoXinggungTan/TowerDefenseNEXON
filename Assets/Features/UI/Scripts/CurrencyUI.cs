@@ -19,7 +19,6 @@ namespace Features.UI.Scripts
 
         private void Start()
         {
-            Show();
             PlayerCurrency.OnCurrentCurrencyChanged += PlayerCurrency_OnCurrentCurrencyChanged;
         }
 
@@ -28,7 +27,7 @@ namespace Features.UI.Scripts
             UpdateCurrencyText(currency);
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             PlayerCurrency.OnCurrentCurrencyChanged -= PlayerCurrency_OnCurrentCurrencyChanged;
         }
@@ -36,16 +35,6 @@ namespace Features.UI.Scripts
         private void UpdateCurrencyText(int currency)
         {
             currencyText.text = Convert.ToString(currency);
-        }
-        
-        private void Show()
-        {
-            gameObject.SetActive(true);
-        }
-
-        private void Hide()
-        {
-            gameObject.SetActive(false);
         }
 
         #endregion

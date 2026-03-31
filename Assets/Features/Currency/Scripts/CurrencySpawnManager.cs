@@ -35,7 +35,7 @@ namespace Features.Currency.Scripts
             EnemyProduct.OnEnemyDies += HandleEnemyDeath;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             EnemyProduct.OnEnemyDies -= HandleEnemyDeath;
         }

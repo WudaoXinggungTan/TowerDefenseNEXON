@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Features.Spawner.Scripts.EnemySpawner
   timeDelay: 1
-  repeatRate: 1
+  repeatRate: 0.1
   enemyFactoriesData: {fileID: 11400000, guid: 7dba4c03d14706f45b49af90f12c65ab, type: 2}

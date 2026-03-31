@@ -36,7 +36,7 @@ namespace Features.Player.Scripts
             SetUIInputAndPlayerInputReference();
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             DisablePlayerAction();
         }

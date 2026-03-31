@@ -47,7 +47,7 @@ namespace Features.Core.Scripts
             PlaySound(audioClipRefsSO.projectileShoot, transform.position);
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             Attack.OnAttack -= Attack_OnAttack;
         }

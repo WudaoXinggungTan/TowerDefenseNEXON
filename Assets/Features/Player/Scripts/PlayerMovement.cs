@@ -39,7 +39,7 @@ namespace Features.Player.Scripts
             moveInputDirection = direction;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             playerInput.Move -= PlayerInputOnMove;
         }

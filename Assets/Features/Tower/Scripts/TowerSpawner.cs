@@ -29,7 +29,7 @@ namespace Features.Tower.Scripts
             }
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             detector.OnCollisionDetected -= HandlePlayerCollision;
         }

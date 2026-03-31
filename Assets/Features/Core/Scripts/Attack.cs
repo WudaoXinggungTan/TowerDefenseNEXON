@@ -96,12 +96,10 @@ namespace Features.Core.Scripts
         private void OnDisable()
         {
             CurrentTarget = null;
-        }
-
-        private void OnDestroy()
-        {
             if (gameObjectDetector != null)
+            {
                 gameObjectDetector.OnGameObjectsDetected -= SelectCurrentTarget;
+            }
         }
 
         #endregion
