@@ -14,52 +14,30 @@ namespace Features.UI.Scripts
 
         [SerializeField] private Image enemyCountImage;
         [SerializeField] private TextMeshProUGUI enemyCountText;
-
-        [SerializeField] private FactoriesDataScriptableObject factoriesData;
-
+        
         #endregion
 
         #region Private Methods
 
         private void Start()
         {
-            InitializeEnemyCountText();
-            EnemyProduct.OnEnemyDies += DecrementEnemyCount;
-        }
-
-        private void DecrementEnemyCount(int currency, Vector3 position)
-        {
             UpdateEnemyCountText();
 
-            if (factoriesData.GetCurrentEnemyCount() <= 0)
-            {
-                GameManager.Instance.EndTheGame();
-            }
+            EnemySpawner.Instance.OnRemainingEnemyCountChanged += EnemySpawner_OnRemainingEnemyCountChanged;
         }
 
-        private void InitializeEnemyCountText()
+        private void EnemySpawner_OnRemainingEnemyCountChanged(object sender, EventArgs e)
         {
-            enemyCountText.text = Convert.ToString(factoriesData.GetTotalSpawnCount());
+            UpdateEnemyCountText();
         }
 
         private void UpdateEnemyCountText()
         {
-            enemyCountText.text = Convert.ToString(factoriesData.GetCurrentEnemyCount());
-        }
-
-        private void Show()
-        {
-            gameObject.SetActive(true);
-        }
-
-        private void Hide()
-        {
-            gameObject.SetActive(false);
+            enemyCountText.text = Convert.ToString(EnemySpawner.Instance.GetRemainingEnemy());
         }
 
         private void OnDisable()
         {
-            EnemyProduct.OnEnemyDies -= DecrementEnemyCount;
         }
 
         #endregion

@@ -54,16 +54,16 @@ namespace Features.Enemy.Scripts
 
         private void HandleEnemyDeath()
         {
-            OnEnemyDies?.Invoke(currencyDropAmount, transform.position);
-            SoundManager.Instance.PlaySound(AudioClipRefsScriptableObject.Instance.enemyDeath, transform.position);
-
             if (isReleased)
             {
                 return;
             }
 
             isReleased = true;
+            
+            SoundManager.Instance.PlaySound(AudioClipRefsScriptableObject.Instance.enemyDeath, transform.position);
             ObjectPoolManager.Instance.ReturnObjectToPool(gameObject);
+            OnEnemyDies?.Invoke(currencyDropAmount, transform.position);
         }
 
         #endregion

@@ -48,16 +48,6 @@ namespace Features.Core.Scripts
 
             return totalSpawnCount;
         }        
-        public int GetCurrentEnemyCount()
-        {
-            int currentEnemyCount = 0;
-            foreach (var factorySpawnData in factoriesList)
-            {
-                currentEnemyCount += factorySpawnData.remainingEnemyCount;
-            }
-
-            return currentEnemyCount;
-        }
         public void ResetSpawnCounts()
         {
             foreach (var factoryData in factoriesList)

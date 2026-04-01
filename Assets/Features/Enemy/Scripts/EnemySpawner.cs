@@ -12,16 +12,18 @@ namespace Features.Enemy.Scripts
     {
         #region Variables
 
+        public static EnemySpawner Instance { get; private set; }
+
         [Tooltip("The enemy will spawn after 'x' amount of time delay")]
         [SerializeField] private float timeDelay = 1f;
         [Tooltip("How fast the system will keep trying to spawn enemy")]
         [SerializeField] private float repeatRate = .1f;
 
         [SerializeField] private FactoriesDataScriptableObject enemyFactoriesData;
-
         private Dictionary<Factory, bool> factoriesCountdownDictionary;
-        public static EnemySpawner Instance { get; private set; }
+        private int remainingEnemyAlive = 0;
         public event EventHandler OnSpawnCountChanged;
+        public event EventHandler OnRemainingEnemyCountChanged;
 
         #endregion
 
@@ -51,21 +53,21 @@ namespace Features.Enemy.Scripts
         private void OnEnable()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
+            EnemyProduct.OnEnemyDies += EnemyProduct_OnEnemyDies;
         }
 
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
+            EnemyProduct.OnEnemyDies -= EnemyProduct_OnEnemyDies;
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if (enemyFactoriesData != null)
-            {
-                enemyFactoriesData.ResetSpawnCounts();
-
-                OnSpawnCountChanged?.Invoke(this, EventArgs.Empty);
-            }
+            remainingEnemyAlive = enemyFactoriesData.GetTotalSpawnCount();
+            enemyFactoriesData.ResetSpawnCounts();
+            OnRemainingEnemyCountChanged?.Invoke(this, EventArgs.Empty);
+            OnSpawnCountChanged?.Invoke(this, EventArgs.Empty);
 
             MapKeyValueDictionary();
         }
@@ -88,6 +90,13 @@ namespace Features.Enemy.Scripts
                     factoriesCountdownDictionary[factorySpawnData.factoryType] = factorySpawnData.OnCooldown;
                 }
             }
+        }
+
+        private void EnemyProduct_OnEnemyDies(int currency, Vector3 position)
+        {
+            remainingEnemyAlive--;
+            OnRemainingEnemyCountChanged?.Invoke(this, EventArgs.Empty);
+            CheckForLevelCompletion();
         }
 
         // Pick a random Factory in the Factory list
@@ -161,6 +170,14 @@ namespace Features.Enemy.Scripts
             StartCoroutine(GetProductRoutine(factoryData));
         }
 
+        private void CheckForLevelCompletion()
+        {
+            if (remainingEnemyAlive <= 0)
+            {
+                GameManager.Instance.EndTheGame();
+            }
+        }
+
         private IEnumerator GetProductRoutine(FactoriesDataScriptableObject.FactorySpawnData factoryData)
         {
             factoriesCountdownDictionary[factoryData.factoryType] = true;
@@ -169,6 +186,12 @@ namespace Features.Enemy.Scripts
 
             factoriesCountdownDictionary[factoryData.factoryType] = false;
         }
+
+        #endregion
+
+        #region Public Methods
+
+        public int GetRemainingEnemy() => remainingEnemyAlive;
 
         #endregion
     }
